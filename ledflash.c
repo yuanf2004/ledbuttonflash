@@ -68,6 +68,24 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
 
+	//https://www.st.com/content/ccc/resource/technical/document/user_manual/2f/77/25/0f/5c/38/48/80/DM00122015.pdf/files/DM00122015.pdf/jcr:content/translations/en.DM00122015.pdf
+
+	//Note: Voltage source is coming from the bottom left pin on the STM32 Nucleo [F446RE], and the pin is PA3.
+
+
+	GPIO_InitTypeDef GPIO_Init_GPIOAStruct = {0}; //Initialize the Pin
+
+
+	//Blueprint for peripheral (__HAL_RCC_PLACEHOLDER_CLK_ENABLE();)
+	__HAL_RCC_GPIOA_CLK_ENABLE(); //Enable clock for GPIOA
+
+
+	GPIO_Init_GPIOAStruct.Pin = GPIO_PIN_3; //Pin A3.
+	GPIO_Init_GPIOAStruct.Mode = GPIO_MODE_OUTPUT_PP; //Push Pull Output, allowing 0 and 1 state.
+	GPIO_Init_GPIOAStruct.Pull = GPIO_NO_PULL; //No default pull state.
+	GPIO_Init_GPIOAStruct.Speed = GPIO_SPEED_FREQ_LOW; //Low frequency since it will respond to a button push.
+	HAL_GPIO_Init(GPIOA, &GPIO_Init_GPIOAStruct); //Apply GPIO configuration settings to GPIO port A.
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
