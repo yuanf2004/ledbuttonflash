@@ -82,7 +82,7 @@ int main(void)
 
 	GPIO_Init_GPIOAStruct.Pin = GPIO_PIN_3; //Pin A3.
 	GPIO_Init_GPIOAStruct.Mode = GPIO_MODE_OUTPUT_PP; //Push Pull Output, allowing 0 and 1 state.
-	GPIO_Init_GPIOAStruct.Pull = GPIO_NO_PULL; //No default pull state.
+	GPIO_Init_GPIOAStruct.Pull = GPIO_NOPULL; //No default pull state.
 	GPIO_Init_GPIOAStruct.Speed = GPIO_SPEED_FREQ_LOW; //Low frequency since it will respond to a button push.
 	HAL_GPIO_Init(GPIOA, &GPIO_Init_GPIOAStruct); //Apply GPIO configuration settings to GPIO port A.
 
@@ -117,13 +117,13 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-//Function: Control the LED based on if the button is pressed.
+	  //Function: Control the LED based on if the button is pressed.
 
-	  if(HAL_Read_Pin(GPIOC, GPIO_Pin_13) == GPIO_Pin_RESET){ //Check to see if button is pressed (Active Low)
-		  HAL_Write_Pin(GPIOA, GPIO_Pin_3, GPIO_Pin_SET);
+	  if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET){ //Check to see if button is pressed (Active Low)
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
 	  }
 	  else{
-		  HAL_Write_Pin(GPIOA,GPIO_PIN_3, GPIO_Pin_RESET); //Else, turn it off.
+		  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3, GPIO_PIN_RESET); //Else, turn it off.
 	  }
 
     /* USER CODE BEGIN 3 */
